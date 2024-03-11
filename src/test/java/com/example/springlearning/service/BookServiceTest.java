@@ -1,9 +1,8 @@
 package com.example.springlearning.service;
 
-import com.example.springlearning.dao.Author;
-import com.example.springlearning.dao.Book;
+import com.example.springlearning.entity.Author;
+import com.example.springlearning.entity.Book;
 import com.example.springlearning.dto.BookDto;
-import com.example.springlearning.mapper.BookMapper;
 import com.example.springlearning.repository.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

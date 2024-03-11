@@ -1,6 +1,6 @@
 package com.example.springlearning.mapper;
 
-import com.example.springlearning.dao.Author;
+import com.example.springlearning.entity.Author;
 import com.example.springlearning.dto.AuthorDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

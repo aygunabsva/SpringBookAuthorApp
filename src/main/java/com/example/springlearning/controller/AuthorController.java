@@ -1,6 +1,6 @@
 package com.example.springlearning.controller;
 
-import com.example.springlearning.dao.Author;
+import com.example.springlearning.entity.Author;
 import com.example.springlearning.dto.AuthorDto;
 import com.example.springlearning.service.AuthorService;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,6 @@ public class AuthorController {
         authorService.createAuthor(authorDto);
         return authorDto;
     }
-
     @GetMapping("readByID")
     public Author getAuthorById(@RequestParam Long authorId) {
         return authorService.findAuthor(authorId);

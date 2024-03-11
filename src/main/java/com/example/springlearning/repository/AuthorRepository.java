@@ -1,6 +1,6 @@
 package com.example.springlearning.repository;
 
-import com.example.springlearning.dao.Author;
+import com.example.springlearning.entity.Author;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

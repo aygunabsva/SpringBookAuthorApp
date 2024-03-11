@@ -1,6 +1,6 @@
 package com.example.springlearning.mapper;
 
-import com.example.springlearning.dao.Book;
+import com.example.springlearning.entity.Book;
 import com.example.springlearning.dto.BookDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

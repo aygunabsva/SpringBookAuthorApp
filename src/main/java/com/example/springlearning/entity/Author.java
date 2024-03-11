@@ -1,4 +1,4 @@
-package com.example.springlearning.dao;
+package com.example.springlearning.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,20 +6,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book {
+public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookId;
-    private String title;
-    private int price;
-    private int publicationYear;
+    private Long id;
+    private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private Author authorDao;
+    @OneToMany(mappedBy = "authorDao", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Book> bookdao;
 }
+
