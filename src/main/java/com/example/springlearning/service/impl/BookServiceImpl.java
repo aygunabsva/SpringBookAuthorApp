@@ -2,6 +2,8 @@ package com.example.springlearning.service.impl;
 
 import com.example.springlearning.dto.BookDto;
 import com.example.springlearning.entity.Book;
+import com.example.springlearning.exception.AlreadyExistException;
+import com.example.springlearning.exception.NotFoundException;
 import com.example.springlearning.mapper.BookMapper;
 import com.example.springlearning.repository.BookRepository;
 import com.example.springlearning.service.AuthorService;
@@ -22,27 +24,46 @@ public class BookServiceImpl implements BookService {
 
     public BookDto create(BookDto dto) {
         authorService.findAuthor(dto.getAuthorId());
+        if (bookRepository.findBookByTitle(dto.getTitle()).isPresent()) {
+            throw new AlreadyExistException("Book already exist");
+        }
         Book book = bookMapper.bookDtoToDao(dto);
-        bookRepository.save(book);
         log.info("Created a new book: {}", dto.getTitle());
-        return dto;
+        return bookMapper.bookDaoToDto(bookRepository.save(book));
     }
 
     public List<BookDto> readAll() {
         List<Book> bookDAOList = bookRepository.findAll();
+        if (bookDAOList.isEmpty()){
+            throw new NotFoundException("Book Not Found");
+        }
         return bookMapper.convertDAOListToDTOList(bookDAOList);
     }
 
-    public List<BookDto> findBooksByPriceRange(int minPrice) {
+    public List<BookDto> findByPriceGreaterThan(int minPrice) {
         List<Book> books = bookRepository.findByPriceGreaterThan(minPrice);
+        if (books.isEmpty()) {
+            throw new NotFoundException("Book Not Found");
+        }
         log.info("Found {} books with a price greater than {}", books.size(), minPrice);
         return bookMapper.convertDAOListToDTOList(books);
     }
 
+    public List<BookDto> findByPriceLowerThan(int maxPrice) {
+        List<Book> books = bookRepository.findByPriceLowerThan(maxPrice);
+        if (books.isEmpty()) {
+            throw new NotFoundException("Book Not Found");
+        }
+        log.info("Found {} books with a price greater than {}", books.size(), maxPrice);
+        return books.stream().map(bookMapper::bookDaoToDto).toList();
+    }
+
     public BookDto readByID(Long id) {
-        Book bookDao = bookRepository.findById(id).get();
-        log.info("Retrieved book by ID: {}", id);
-        return bookMapper.bookDaoToDto(bookDao);
+        BookDto bookDto = bookRepository.findById(id)
+                .map(bookMapper::bookDaoToDto)
+                .orElseThrow(() -> new NotFoundException("Book Not Found"));
+        log.info("Retrieved book by ID:{}", id);
+        return bookDto;
     }
 
     public BookDto update(BookDto dto, Long id) {

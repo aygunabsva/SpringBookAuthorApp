@@ -11,7 +11,9 @@ public interface BookService {
 
     List<BookDto> readAll();
 
-    List<BookDto> findBooksByPriceRange(int minPrice);
+    List<BookDto> findByPriceGreaterThan(int minPrice);
+    List<BookDto> findByPriceLowerThan(int maxPrice);
+
 
     BookDto readByID(Long id);
 

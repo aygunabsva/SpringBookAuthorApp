@@ -5,6 +5,7 @@ import com.example.springlearning.dto.AuthorDto;
 import com.example.springlearning.service.AuthorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,11 +16,11 @@ import java.util.List;
 public class AuthorController {
     private final AuthorService authorService;
 
-    @PostMapping("create")
-    public AuthorDto createAuthor(@RequestBody AuthorDto authorDto) {
-        authorService.createAuthor(authorDto);
-        return authorDto;
-    }
+//    @PostMapping("create")
+//    public AuthorDto createAuthor(@RequestBody AuthorDto authorDto) {
+//        authorService.createAuthor(authorDto);
+//        return authorDto;
+//    }
     @GetMapping("readByID")
     public Author getAuthorById(@RequestParam Long authorId) {
         return authorService.findAuthor(authorId);
@@ -30,14 +31,14 @@ public class AuthorController {
         return authorService.getAllAuthors();
     }
 
-    @PutMapping("update")
-    public AuthorDto updateAuthor(@RequestParam Long id, @RequestBody AuthorDto authorDto) {
-        return authorService.updateAuthor(id, authorDto);
-    }
+//    @PutMapping("update")
+//    public AuthorDto updateAuthor(@RequestParam Long id, @RequestBody AuthorDto authorDto) {
+//        return authorService.updateAuthor(id, authorDto);
+//    }
 
-    @DeleteMapping("delete")
-    public String deleteAuthor(@RequestParam Long id) {
-        authorService.deleteAuthor(id);
-        return HttpStatus.OK.name();
-    }
+//    @DeleteMapping("delete")
+//    public ResponseEntity<Author> deleteAuthor(@RequestParam Long id) {
+//        authorService.deleteAuthor(id);
+//        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+//    }
 }
