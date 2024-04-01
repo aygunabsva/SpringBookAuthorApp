@@ -1,3 +1,3 @@
-spring security
-mail sending
+spring security,
+mail sending,
 liquibase
